@@ -14,13 +14,15 @@ export const DisableInputExtension = {
       if (chatDiv) {
         const shadowRoot = chatDiv.shadowRoot
         if (shadowRoot) {
-          const chatInput = shadowRoot.querySelector('.vfrc-chat-input')
-          const textarea = shadowRoot.querySelector(
+          const v3InputContainerClass = '.vfrc-input-container';
+          const chatInput = shadowRoot.querySelector(v3InputContainerClass) || shadowRoot.querySelector('.vfrc-chat-input');
+          const textarea = shadowRoot.querySelector(v3InputContainerClass + ' textarea') || shadowRoot.querySelector(
             'textarea[id^="vf-chat-input--"]'
-          )
+          );
+          const v3Buttons = shadowRoot.querySelectorAll(v3InputContainerClass + ' button');
           const button = shadowRoot.querySelector('.vfrc-chat-input--button')
 
-          if (chatInput && textarea && button) {
+          if (chatInput && textarea && (v3Buttons.length > 0 || button)) {
             // Add a style tag if it doesn't exist
             let styleTag = shadowRoot.querySelector('#vf-disable-input-style')
             if (!styleTag) {
@@ -42,7 +44,12 @@ export const DisableInputExtension = {
               if (!isDisabled) {
                 textarea.placeholder = 'Message...'
                 chatInput.classList.remove('vf-no-border')
-                button.classList.remove('vf-hide-button')
+                if (v3Buttons) {
+                  v3Buttons.forEach(b => b.classList.remove('vf-hide-button'));
+                  textarea.style.backgroundColor = 'none';
+                } else {
+                  button.classList.remove('vf-hide-button')
+                }
                 // Restore original value getter/setter
                 Object.defineProperty(
                   textarea,
@@ -52,7 +59,12 @@ export const DisableInputExtension = {
               } else {
                 textarea.placeholder = ''
                 chatInput.classList.add('vf-no-border')
-                button.classList.add('vf-hide-button')
+                if (v3Buttons) {
+                  v3Buttons.forEach(b => b.classList.add('vf-hide-button'));
+                  textarea.style.backgroundColor = 'transparent';
+                } else {
+                  button.classList.add('vf-hide-button')
+                }
                 Object.defineProperty(textarea, 'value', {
                   get: function () {
                     return ''

@@ -59,7 +59,7 @@ export const DisableInputExtension = {
               } else {
                 textarea.placeholder = ''
                 chatInput.classList.add('vf-no-border')
-                if (v3Buttons) {
+                if (v3Buttons.length > 0) {
                   v3Buttons.forEach(b => b.classList.add('vf-hide-button'));
                   textarea.style.backgroundColor = 'transparent';
                 } else {

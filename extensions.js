@@ -44,9 +44,8 @@ export const DisableInputExtension = {
               if (!isDisabled) {
                 textarea.placeholder = 'Message...'
                 chatInput.classList.remove('vf-no-border')
-                if (v3Buttons) {
+                if (v3Buttons.length > 0) {
                   v3Buttons.forEach(b => b.classList.remove('vf-hide-button'));
-                  textarea.style.backgroundColor = 'none';
                 } else {
                   button.classList.remove('vf-hide-button')
                 }

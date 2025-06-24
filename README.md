@@ -74,3 +74,5 @@ The demo uses the canvas-confetti library to create the confetti effect. Make su
 ### Note
 Remember to replace the projectID and versionID. Additionally, ensure that you have the necessary permissions and API keys for services like Google Maps if you're using the MapExtension.
 
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=voiceflow-community_vf-extensions-demo&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=voiceflow-community_vf-extensions-demo)
